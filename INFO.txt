@@ -9,3 +9,6 @@ npm i express-validator
 
 Encriptar contraseñas
 npm i bcryptjs
+
+General JWT (JSON WEB TOKEN)
+npm i jsonwebtoken
