@@ -3,3 +3,6 @@ npm i dotenv
 
 Instalar el cors (Para que me acepte peticiones de diferentes dominios)
 npm i cors
+
+Paquete de Node para express de validadores predefinidos
+npm i express-validator

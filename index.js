@@ -1,3 +1,8 @@
+/* El término middleware se refiere al sistema de software que ofrece funciones y servicios de nube comunes
+para las aplicaciones, de modo que los desarrolladores y los equipos de operaciones puedan diseñarlas e
+implementarlas con mayor eficiencia. Además, permite conectar las aplicaciones, los datos y los usuarios. */
+
+
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors')
@@ -10,6 +15,9 @@ const app = express();
 // Configurar cors
 app.use(cors());
 
+// Lectura y parseo del body
+app.use(express.json());
+
 // Base de datos
 dbConnection();
 
@@ -18,14 +26,7 @@ dbConnection();
 
 
 // Rutas
-app.get('/', (req, res) =>{
-    
-    res.json({
-        ok: true,
-        msg: 'Hola Mundo'
-    })
-
-});
+app.use('/api/usuarios', require('./routes/usuarios'));
 
 
 app.listen(process.env.PORT, () => {
