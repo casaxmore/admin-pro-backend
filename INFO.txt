@@ -6,3 +6,6 @@ npm i cors
 
 Paquete de Node para express de validadores predefinidos
 npm i express-validator
+
+Encriptar contraseñas
+npm i bcryptjs
