@@ -12,3 +12,9 @@ npm i bcryptjs
 
 General JWT (JSON WEB TOKEN)
 npm i jsonwebtoken
+
+Subir archivos con express
+npm i express-fileupload
+
+Para crear identificadores únicos
+npm install uuid
