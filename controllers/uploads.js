@@ -1,3 +1,7 @@
+// Viene con node, para poder construir un path completo
+const path = require("path");
+const fs = require("fs");
+
 const { response } = require("express");
 const { v4: uuidv4 } = require("uuid");
 const { actualizarImagen } = require("../helpers/actualizar-imagen");
@@ -62,12 +66,29 @@ const fileUpLoad = (req, res = response) => {
 
     res.json({
       ok: true,
-      msg: 'Archivo subido',
-      nombreArchivo
+      msg: "Archivo subido",
+      nombreArchivo,
     });
   });
 };
 
+const retornaImagen = (req, res = response) => {
+  const tipo = req.params.tipo;
+  const foto = req.params.foto;
+
+  const pathImg = path.join(__dirname, `../uploads/${tipo}/${foto}`);
+
+  // Imagen por defecto
+
+  if (fs.existsSync(pathImg)) {
+    res.sendFile(pathImg);
+  } else {
+    const pathImg = path.join(__dirname, `../uploads/no-img.jpg`);
+    res.sendFile(pathImg);
+  }
+};
+
 module.exports = {
   fileUpLoad,
+  retornaImagen,
 };
