@@ -5,7 +5,6 @@ const Usuario = require("../models/usuario");
 const { generarJWT } = require("../helpers/jwt");
 
 const getUsuarios = async (req, res) => {
-
   /* Paginación */
   const desde = Number(req.query.desde || 0);
 
@@ -18,7 +17,7 @@ const getUsuarios = async (req, res) => {
 
   const [usuarios, total] = await Promise.all([
     Usuario.find({}, "nombre email role google img").skip(desde).limit(5),
-    Usuario.countDocuments()
+    Usuario.countDocuments(),
   ]);
 
   res.json({
@@ -94,8 +93,14 @@ const actualizarUsuario = async (req, res = response) => {
         });
       }
     }
-
-    campos.email = email;
+    if (!usuarioDB.google || usuarioDB.google === usuarioDB.google) {
+      campos.email = email;
+    } else if (usuarioDB.google !== email) {
+      return res.status(400).json({
+        ok: false,
+        msg: "Usuario de google no puedo cambiar su correo",
+      });
+    }
 
     const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {
       new: true,
